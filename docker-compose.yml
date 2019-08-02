@@ -1,29 +1,29 @@
-version: '2'
+version: '3.1'
 services:
-  piwik:
-    image: piwik
+  matomo:
+    image: "matomo:fpm-alpine"
     volumes:
-      - ../piwik:/var/www/html
-      - ./piwik.php.ini:/usr/local/etc/php/conf.d/piwik.php.ini
+      - ../matomo:/var/www/html
+      - ./docker-compose-etc/matomo.php.ini:/usr/local/etc/php/conf.d/matomo.php.ini
     depends_on:
       - mariadb
   mariadb:
     image: mariadb
-    container_name: piwik-mariadb
+    container_name: matomo-mariadb
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: pass
     volumes:
-      - ./mariadb:/var/lib/mysql
+      - ./.mariadb:/var/lib/mysql
   nginx:
     image: bitnami/nginx
-    container_name: piwik-nginx
+    container_name: matomo-nginx
     restart: always
     links:
-      - piwik
+      - matomo
     volumes:
-      - ./vhost.conf:/bitnami/nginx/conf/vhosts/piwik.conf
-      - ../piwik:/var/www/html
+      - ./docker-compose-etc/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
+      - ../matomo:/var/www/html
     ports:
-      - "3000:80"
+      - "3000:8080"
 
