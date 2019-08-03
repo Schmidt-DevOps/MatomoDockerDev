@@ -8,7 +8,7 @@ Set up a development environment for Matomo quick & easy.
 docker-compose up
 ```
 
-Then open http://localhost:3000 in your web browser. Enter the following DB setup:
+Then open http://localhost:3000 or https://localhost:3443 in your web browser. Enter the following DB setup:
 
 1. Server: mariadb
 1. User: root
@@ -26,10 +26,13 @@ docker exec -it matomodockerdev_matomo_1 rm /var/www/html/config/config.ini.php
 docker exec -it matomo-mariadb mysql -uroot -ppass -e "DROP DATABASE matomo;"
 ```
 
-Then open http://localhost:3000/ in your webbrowser.
+Then open http://localhost:3000/ or https://localhost:3443/ in your webbrowser.
 
 # piwik-docker-dev
 Development docker-compose.yml for Piwik.
 
 Original by https://github.com/Alexcn/piwik-docker-dev
 
+# Todo
+
+1. xdebug

@@ -27,5 +27,6 @@ services:
       - ./docker-compose-etc/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
       - ../matomo:/var/www/html
     ports:
-      - "3000:8080"
+    - "3000:8080"
+    - "3443:8443"
 
